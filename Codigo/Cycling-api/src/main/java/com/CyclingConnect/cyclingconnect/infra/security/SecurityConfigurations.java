@@ -44,7 +44,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/exercise").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/auth/allUsers").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/auth/changePassword/{username}").permitAll()
-
+                        .requestMatchers(HttpMethod.GET, "/auth/findByEmail/{email}").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

@@ -46,4 +46,8 @@ public class AuthorizationService implements UserDetailsService {
         return repository.save(user);
     }
 
+    public User findByEmail(String email) {
+        return repository.findByEmailAsync(email);
+    }
+
 }

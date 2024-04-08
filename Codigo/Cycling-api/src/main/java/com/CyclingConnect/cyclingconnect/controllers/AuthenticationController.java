@@ -100,4 +100,9 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity findByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(this.userRepository.findByEmailAsync(email));
+    }
+
 }
