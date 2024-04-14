@@ -45,6 +45,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/auth/allUsers").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/auth/changePassword/{username}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/auth/findByEmail/{email}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/management/get-code").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/management/change-password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/management/update-password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/logout").permitAll()
+
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

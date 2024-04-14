@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.CyclingConnect.cyclingconnect.infra.security.TokenService;
 import com.CyclingConnect.cyclingconnect.models.AuthenticationDTO;
 import com.CyclingConnect.cyclingconnect.models.LoginResponseDTO;
+
 import com.CyclingConnect.cyclingconnect.models.RegisterDTO;
 import com.CyclingConnect.cyclingconnect.models.User;
 import com.CyclingConnect.cyclingconnect.repositories.UserRepository;
+import com.CyclingConnect.cyclingconnect.service.AuthorizationService;
 
 import jakarta.validation.Valid;
 
@@ -33,6 +36,9 @@ public class AuthenticationController {
     private UserRepository userRepository;
 
     @Autowired
+    private AuthorizationService userService;
+
+    @Autowired
     private TokenService tokenService;
 
     /**
@@ -43,12 +49,17 @@ public class AuthenticationController {
      *         for bem-sucedida.
      */
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
+        User authenticatedUser = (User) auth.getPrincipal();
 
-        var token = tokenService.generateToken((User) auth.getPrincipal());
+        String token = tokenService.generateToken(authenticatedUser);
 
+        authenticatedUser.setLoginToken(token);
+        userRepository.save(authenticatedUser);
+
+        // Retornar resposta com o token
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
@@ -63,8 +74,9 @@ public class AuthenticationController {
         if (this.userRepository.findByLogin(data.login()) != null)
             return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, data.role(), data.phone(), data.gender(),
-                data.birthdate(), data.email(), data.cpf());
+        User newUser = new User(null, data.login(), encryptedPassword, data.role(), data.phone(), encryptedPassword,
+                data.gender(),
+                data.birthdate(), data.email(), data.cpf(), null, null, null);
 
         this.userRepository.save(newUser);
 
@@ -79,25 +91,6 @@ public class AuthenticationController {
     @GetMapping("/allUsers")
     public ResponseEntity allUsers() {
         return ResponseEntity.ok(this.userRepository.findAll());
-    }
-
-    /**
-     * Endpoint para alterar a senha de um usuário.
-     * 
-     * @param newPassword A nova senha do usuário.
-     * @return Um ResponseEntity indicando se a senha foi alterada com sucesso.
-     */
-
-    @PutMapping("/changePassword/{username}")
-    public ResponseEntity changePassword(@PathVariable String username, @RequestParam String newPassword) {
-        User user = this.userRepository.findByLoginAsync(username);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-        String encryptedPassword = new BCryptPasswordEncoder().encode(newPassword);
-        user.setPassword(encryptedPassword);
-        this.userRepository.save(user);
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/findByEmail/{email}")

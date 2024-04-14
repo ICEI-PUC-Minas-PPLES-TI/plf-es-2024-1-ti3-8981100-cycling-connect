@@ -7,3 +7,4 @@ package com.CyclingConnect.cyclingconnect.models;
 public record LoginResponseDTO(String token) {
     
 }
+

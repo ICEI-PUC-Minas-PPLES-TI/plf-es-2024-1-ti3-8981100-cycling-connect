@@ -30,4 +30,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.email = :email")
     User findByEmailAsync(String email);
 
+    @Query("SELECT u FROM User u WHERE u.email = :email AND u.recuperationCode = :recuperationCode")
+    User findByEmailAndCode(String email, String recuperationCode);
+
+    @Query("SELECT u FROM User u WHERE u.loginToken = :loginToken")
+    User findByToken(String login);
+
+
 }
