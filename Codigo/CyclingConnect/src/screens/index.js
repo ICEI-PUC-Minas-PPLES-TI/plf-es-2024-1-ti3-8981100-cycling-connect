@@ -17,3 +17,4 @@ export {default as Profile} from './Profile';
 export {default as UserInformation} from './Profile/UserInformation';
 export {default as UpdateUserInformation} from './Profile/UpdateUserInformation';
 export {default as DeleteAccount} from './DeleteAccount';
+export {default as NoticeBoard} from './NoticeBoard';
