@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * A classe Notice representa uma entidade de aviso que será armazenada no banco de dados.
@@ -41,8 +41,7 @@ public class Notice {
     private String description;
 
     @Column(name = "date_posted", columnDefinition = "TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date datePosted;
+    private LocalDateTime datePosted;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

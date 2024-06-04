@@ -1,6 +1,6 @@
 package com.CyclingConnect.cyclingconnect.models.notices;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * A classe NoticeDTO representa um Objeto de Transferência de Dados (DTO) para um aviso.
@@ -13,6 +13,7 @@ import java.util.Date;
  * @param datePosted A data da postagem do aviso.
  * @param status O status do aviso.
  */
-public record NoticeDTO(String title, String description, Date datePosted, String status) {
+public record NoticeDTO(String title, String description, LocalDateTime datePosted, NoticeStatus status) {
     
 }
+ß
