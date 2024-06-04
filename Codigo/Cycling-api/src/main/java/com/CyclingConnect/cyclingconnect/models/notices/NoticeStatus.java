@@ -1,4 +1,4 @@
-package com.CyclingConnect.cyclingconnect.models.notices;
+package main.java.com.CyclingConnect.cyclingconnect.models.notices;
 
 /**
  * A enumeração NoticeStatus representa os diferentes status de um aviso.
@@ -25,4 +25,3 @@ public enum NoticeStatus {
         return status;
     }
 }
-ß
