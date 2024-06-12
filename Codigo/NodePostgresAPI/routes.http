@@ -1,0 +1,25 @@
+POST https://node-postgres-reactnative.onrender.com/notice
+content-type: application/json
+
+{
+    "title": "Simulado L'etape Rio",
+    "description": "Olá, equipe! Estou animado para anunciar que neste fim de semana realizaremos um simulado da L'Étape Rio 2024, onde teremos a chance de experimentar uma parte do trajeto oficial e discutir estratégias de corrida. Os detalhes são: Data: 22/06, Horário: 06:00, Ponto de Encontro: Entrada Zona Sul Jardim Botânico, Trajeto: Vista Chinesa. Este treino é essencial para nosso preparo e sucesso na prova, então vamos aproveitar para aprimorar nossas técnicas e fortalecer nosso entrosamento. Por favor, confirmem sua presença o quanto antes e estejam prontos para pedalar! Conto com todos vocês! Abraços, Guilherme"
+}
+
+###
+GET https://node-postgres-reactnative.onrender.com/notice
+
+###
+PUT https://node-postgres-reactnative.onrender.com/notice/811dc449-f5fc-4598-81f2-b86e8036ff45
+content-type: application/json
+
+{
+    "title": "Simulado L'etape Rio",
+    "description": "Olá, equipe! Estou animado para anunciar que neste fim de semana realizaremos um simulado da L'Étape Rio 2024, onde teremos a chance de experimentar uma parte do trajeto oficial e discutir estratégias de corrida. Os detalhes são: Data: 22/06, Horário: 06:00, Ponto de Encontro: Entrada Zona Sul Jardim Botânico, Trajeto: Vista Chinesa. Este treino é essencial para nosso preparo e sucesso na prova, então vamos aproveitar para aprimorar nossas técnicas e fortalecer nosso entrosamento. Por favor, confirmem sua presença o quanto antes e estejam prontos para pedalar! Conto com todos vocês! Abraços, Guilherme"
+}
+
+###
+DELETE https://node-postgres-reactnative.onrender.com/notice/43838143-c72b-4c26-b505-c95a77f55dbb
+
+
+ 
