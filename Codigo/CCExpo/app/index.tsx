@@ -66,18 +66,18 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 36,
     fontWeight: 'bold',
-    marginBottom: 20, // Space below the title
+    marginBottom: 20,
     color: '#F30',
   },
   scrollView: {
     width: '100%',
   },
   card: {
-    backgroundColor: '#AAA',
-    padding: 26,
+    backgroundColor: '#555',
+    padding: 20,
     borderRadius: 14,
     marginVertical: 12,
-    marginHorizontal: 30,
+    marginHorizontal: 26,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
@@ -85,11 +85,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 18,
+    fontSize: 21,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 8,
+    color: 'white'
   },
   description: {
     fontSize: 16,
+    color: 'white'
   },
 });
